@@ -1,13 +1,13 @@
-import { PostgresHelper } from '../../db/postgres/helper'
+import { PostgresHelper } from '../../db/postgres/helper.js'
 
 export class PostgresUpdateUserRepository {
-    async execute(userId, updateParams) {
+    async execute(userId, updateUserParams) {
         const updateFields = [] // ['first_name = $1', 'last_name = $2']
         const updateValues = [] // [Igor, Salomão]
 
-        Object.keys(updateParams).forEach((key) => {
+        Object.keys(updateUserParams).forEach((key) => {
             updateFields.push(`${key} = $${updateValues.length + 1}`)
-            updateValues.push(updateParams[key])
+            updateValues.push(updateUserParams[key])
         })
 
         updateValues.push(userId)
