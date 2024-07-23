@@ -37,12 +37,12 @@ app.get('/api/users/:userId', async (request, response) => {
 })
 
 app.post('/api/users', async (request, response) => {
-    const createUserRepository = new PostgresCreateUserRepository()
     const getUserByEmailRepository = new PostgresGetUserByEmailRepository()
+    const createUserRepository = new PostgresCreateUserRepository()
 
     const createUserUseCase = new CreateUserUseCase(
-        createUserRepository,
         getUserByEmailRepository,
+        createUserRepository,
     )
 
     const createUserController = new CreateUserController(createUserUseCase)
@@ -53,12 +53,12 @@ app.post('/api/users', async (request, response) => {
 })
 
 app.patch('/api/users/:userId', async (request, response) => {
-    const updateUserRepository = new PostgresUpdateUserRepository()
     const getUserByEmailRepository = new PostgresGetUserByEmailRepository()
+    const updateUserRepository = new PostgresUpdateUserRepository()
 
     const updateUserUseCase = new UpdateUserUseCase(
-        updateUserRepository,
         getUserByEmailRepository,
+        updateUserRepository,
     )
 
     const updateUserController = new UpdateUserController(updateUserUseCase)
