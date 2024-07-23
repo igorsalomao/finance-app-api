@@ -1,11 +1,10 @@
-import { PostgresDeleteUserRepository } from '../repositories/postgres/index.js'
-
 export class DeleteUserUseCase {
+    constructor(deleteUserRepository) {
+        this.deleteUserRepository = deleteUserRepository
+    }
     async execute(userId) {
-        const postgresDeleteUserRepository = new PostgresDeleteUserRepository()
+        const deletedUser = this.deleteUserRepository.execute(userId)
 
-        const deleteUser = postgresDeleteUserRepository.execute(userId)
-
-        return deleteUser
+        return deletedUser
     }
 }
