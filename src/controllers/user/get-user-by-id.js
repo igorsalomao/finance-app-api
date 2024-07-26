@@ -4,7 +4,7 @@ import {
     checkIfIdIsValid,
     invalidIdResponse,
     userNotFoundResponse,
-} from './helpers/index.js'
+} from '../helpers/index.js'
 
 export class GetUserByController {
     constructor(getUserByIdUseCase) {

@@ -17,6 +17,7 @@ export class CreateTransactionUseCase {
             throw new UserNotFoundError(userId)
         }
 
+        // Gerar ID da transação
         const transactionId = uuidv4()
 
         const transaction = await this.createTransactionRepository.execute({
