@@ -1,12 +1,14 @@
-import validator from 'validator'
 import {
-    badRequest,
     checkIfIdIsValid,
     created,
     invalidIdResponse,
     requiredFieldIsMissingResponse,
     serverError,
     validateRequiredFields,
+    checkIfAmountIsValid,
+    checkIfTypeIsValid,
+    invalidAmountResponse,
+    invalidTypeResponse,
 } from '../helpers/index.js'
 
 export class CreateTransactionController {
@@ -17,7 +19,6 @@ export class CreateTransactionController {
         try {
             const params = httpRequest.body
 
-            //TODO: refatorar validação de campos
             const requireFields = ['user_id', 'name', 'date', 'amount', 'type']
 
             const { ok: requiredFieldsWereProvided, missingField } =
@@ -35,37 +36,19 @@ export class CreateTransactionController {
             }
 
             // Verificando se o valor da transação é valido
-            if (params.amount <= 0) {
-                return badRequest({ message: 'Amount must be greater than 0.' })
-            }
-
-            const amountIsValid = validator.isCurrency(
-                params.amount.toString(),
-                {
-                    digits_after_decimal: [2],
-                    allow_negatives: false,
-                    decimal_separator: '.',
-                },
-            )
+            const amountIsValid = checkIfAmountIsValid(params.amount)
 
             if (!amountIsValid) {
-                return badRequest({
-                    message: 'Amount must be a valid currency.',
-                })
+                return invalidAmountResponse()
             }
 
             // Verificando se o tipo da transação é valido
             const type = params.type.trim().toUpperCase()
 
-            const typeIsValid = ['EARNINGS', 'EXPENSE', 'INVESTMENT'].includes(
-                type,
-            )
+            const typeIsValid = checkIfTypeIsValid(type)
 
             if (!typeIsValid) {
-                return badRequest({
-                    message:
-                        'The type must be one of: EARNINGS, EXPENSE or INVESTMENT.',
-                })
+                return invalidTypeResponse()
             }
 
             // Criando a transação
