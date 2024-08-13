@@ -5,7 +5,7 @@ import {
     checkIfIdIsValid,
     invalidIdResponse,
     ok,
-} from '../index.js'
+} from '../helpers/index.js'
 
 export class GetUserBalanceController {
     constructor(getUserBalanceUseCase) {
@@ -31,6 +31,7 @@ export class GetUserBalanceController {
             }
 
             console.error(error)
+
             return serverError()
         }
     }
