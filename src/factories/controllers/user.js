@@ -2,7 +2,7 @@ import {
     CreateUserController,
     DeleteUserController,
     GetUserBalanceController,
-    GetUserByController,
+    GetUserByIdController,
     UpdateUserController,
 } from '../../controllers/index.js'
 import {
@@ -26,9 +26,9 @@ export const makeGetUserByIdController = () => {
 
     const getUserByIdUseCase = new GetUserByIdUseCase(getUserByIdRepository)
 
-    const getUserByController = new GetUserByController(getUserByIdUseCase)
+    const getUserByIdController = new GetUserByIdController(getUserByIdUseCase)
 
-    return getUserByController
+    return getUserByIdController
 }
 
 export const makeCreateUserController = () => {

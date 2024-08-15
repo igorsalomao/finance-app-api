@@ -19,9 +19,9 @@ const app = express()
 app.use(express.json())
 
 app.get('/api/users/:userId', async (request, response) => {
-    const getUserByController = makeGetUserByIdController()
+    const getUserByIdController = makeGetUserByIdController()
 
-    const { statusCode, body } = await getUserByController.execute(request)
+    const { statusCode, body } = await getUserByIdController.execute(request)
 
     response.status(statusCode).send(body)
 })

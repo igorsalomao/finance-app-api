@@ -1,12 +1,12 @@
 import {
-    ok,
-    serverError,
     checkIfIdIsValid,
     invalidIdResponse,
     userNotFoundResponse,
+    ok,
+    serverError,
 } from '../helpers/index.js'
 
-export class GetUserByController {
+export class GetUserByIdController {
     constructor(getUserByIdUseCase) {
         this.getUserByIdUseCase = getUserByIdUseCase
     }
