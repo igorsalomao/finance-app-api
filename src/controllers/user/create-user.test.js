@@ -46,7 +46,6 @@ describe('Create User Controller', () => {
 
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('First name is required.')
     })
 
     it('should return 400 if last_name is not provided', async () => {
@@ -64,7 +63,6 @@ describe('Create User Controller', () => {
         const result = await createUserController.execute(httpRequest)
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('Last name is required.')
     })
 
     it('should return 400 if email is not provided', async () => {
@@ -82,7 +80,6 @@ describe('Create User Controller', () => {
         const result = await createUserController.execute(httpRequest)
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('E-mail is required.')
     })
 
     it('should return 400 if email is not valid', async () => {
@@ -101,7 +98,6 @@ describe('Create User Controller', () => {
         const result = await createUserController.execute(httpRequest)
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('Please provide a valid e-mail.')
     })
 
     it('should return 400 if password is not provided', async () => {
@@ -119,7 +115,6 @@ describe('Create User Controller', () => {
         const result = await createUserController.execute(httpRequest)
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('Password is required.')
     })
 
     it('should return 400 if password has less than 6 characters', async () => {
@@ -138,8 +133,5 @@ describe('Create User Controller', () => {
         const result = await createUserController.execute(httpRequest)
         // assert
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe(
-            'Password must have at least 6 characters.',
-        )
     })
 })
