@@ -15,11 +15,12 @@ describe('GetUserByIdController', () => {
     }
 
     const makeSut = () => {
-        const GetUserByIdUseCase = new GetUserByIdUseCaseStub()
-        const sut = new GetUserByIdController(GetUserByIdUseCase)
+        const getUserByIdUseCase = new GetUserByIdUseCaseStub()
+        const sut = new GetUserByIdController(getUserByIdUseCase)
 
-        return { sut, GetUserByIdUseCase }
+        return { sut, getUserByIdUseCase }
     }
+
     it('should return 200 if a user is found', async () => {
         // arrange
         const { sut } = makeSut()
@@ -31,5 +32,16 @@ describe('GetUserByIdController', () => {
 
         // assert
         expect(result.statusCode).toBe(200)
+    })
+
+    it('should return 400 if id is invalid', async () => {
+        // arrange
+        const { sut } = makeSut()
+
+        // act
+        const result = await sut.execute({ params: { userId: 'invalid_id' } })
+
+        // assert
+        expect(result.statusCode).toBe(400)
     })
 })
