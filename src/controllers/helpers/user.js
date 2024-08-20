@@ -10,8 +10,5 @@ export const emailIsAlreadyInUseResponse = () =>
         message: `Invalid e-mail. Please provide a valid one.`,
     })
 
-export const userNotFoundResponse = () => {
-    notFound({
-        message: 'User not found.',
-    })
-}
+export const userNotFoundResponse = () =>
+    notFound({ message: 'User not found.' })
