@@ -19,16 +19,48 @@ describe('CreateTransactionController', () => {
             user_id: faker.string.uuid(),
             name: faker.person.firstName(),
             date: faker.date.anytime().toISOString(),
-            type: 'EARNINGS',
+            type: 'EXPENSE',
             amount: Number(faker.finance.amount()),
         },
     }
-    it('should return 201 when creating a transaction successfully', async () => {
+    it('should return 201 when creating a transaction successfully (expenses)', async () => {
         // arrange
         const { sut } = makeSut()
 
         // act
         const result = await sut.execute(baseHttpRequest)
+
+        // assert
+        expect(result.statusCode).toBe(201)
+    })
+
+    it('should return 201 when creating a transaction successfully (earnings)', async () => {
+        // arrange
+        const { sut } = makeSut()
+
+        // act
+        const result = await sut.execute({
+            body: {
+                ...baseHttpRequest.body,
+                type: 'EARNINGS',
+            },
+        })
+
+        // assert
+        expect(result.statusCode).toBe(201)
+    })
+
+    it('should return 201 when creating a transaction successfully (investments)', async () => {
+        // arrange
+        const { sut } = makeSut()
+
+        // act
+        const result = await sut.execute({
+            body: {
+                ...baseHttpRequest.body,
+                type: 'INVESTMENT',
+            },
+        })
 
         // assert
         expect(result.statusCode).toBe(201)
