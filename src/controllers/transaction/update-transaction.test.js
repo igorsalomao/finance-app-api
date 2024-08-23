@@ -57,4 +57,21 @@ describe('UpdateTransactionController', () => {
         // assert
         expect(response.statusCode).toBe(400)
     })
+
+    it('should return 400 when invalid field is provided', async () => {
+        // arrange
+        const { sut } = makeSut()
+
+        // act
+        const response = await sut.execute({
+            ...baseHttpRequest,
+            body: {
+                ...baseHttpRequest.body,
+                invalidField: 'invalid_field',
+            },
+        })
+
+        // assert
+        expect(response.statusCode).toBe(400)
+    })
 })
