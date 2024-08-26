@@ -6,17 +6,17 @@ export class GetTransactionsByUserIdUseCase {
             getTransactionsByUserIdRepository
         this.getUserByIdRepository = getUserByIdRepository
     }
-    async execute(params) {
+    async execute(userId) {
         // Validar se o user existe
-        const user = await this.getUserByIdRepository.execute(params.userId)
+        const user = await this.getUserByIdRepository.execute(userId)
 
         if (!user) {
-            throw new UserNotFoundError(params.userId)
+            throw new UserNotFoundError(userId)
         }
 
         // Chamar o repository para buscar as transações
         const transaction =
-            await this.getTransactionsByUserIdRepository.execute(params.userId)
+            await this.getTransactionsByUserIdRepository.execute(userId)
 
         return transaction
     }
